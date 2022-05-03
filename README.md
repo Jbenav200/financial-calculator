@@ -7,6 +7,7 @@
 par amount: 1000
 term to maturity 1 years
 quarterly coupon rate 1.5% payable quarterly
+<div align="center">
 
 | Term	         | Annual spot interest rate |
 |:--------------|:-------------------------:|
@@ -15,6 +16,7 @@ quarterly coupon rate 1.5% payable quarterly
 | 9-month	      |            7%             |
 | 12-month      |            8%             |
 
+</div>
 
 2. A loan of $10,000 USD is being repaid by 10 equal annual installments at 6% interest effective annually.
 
