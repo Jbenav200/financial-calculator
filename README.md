@@ -18,6 +18,8 @@ quarterly coupon rate 1.5% payable quarterly
 
 </div>
 
+### For answer to question 1 - see bond_calculator.py
+
 2. A loan of $10,000 USD is being repaid by 10 equal annual installments at 6% interest effective annually.
 
     a. If the installment is made at the end of each year, what is the amount of each annual installment?
@@ -27,3 +29,5 @@ quarterly coupon rate 1.5% payable quarterly
     c. Assume the installment is made at the end of each year, please find the principle remaining at the beginning of Year 6. For the amount of installment paid at the end of Year 6, how much of it repays the remaining principle?
 
     d. Let us continue the assumption that each annual installment is made at the end of each year. If a 2,000 prepayment happens in the middle of Year 6, and no more prepayments are made after Year 6. Further assume that the remaining year-end installments stay the same. How many years are left before the loan is fully paid, assuming no more prepayments?
+
+### For answer to question 2 - see loan_calculator.py
