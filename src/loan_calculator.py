@@ -70,11 +70,12 @@ def generate_table(amount, interest, term):
                     round(LOAN_TABLE[i - 2][1] + LOAN_TABLE[i - 2][2] - LOAN_TABLE[i - 2][3], 2),
                     round((LOAN_TABLE[i - 2][1] + LOAN_TABLE[i - 2][2] - LOAN_TABLE[i - 2][3]) * INTEREST_RATE, 2),
                     round(repayment_value, 2),
-                    round((LOAN_TABLE[i - 2][1] + LOAN_TABLE[i - 2][2] - LOAN_TABLE[i - 2][3] + ((LOAN_TABLE[i - 2][1] +
-                                                                                                  LOAN_TABLE[i - 2][2] -
-                                                                                                  LOAN_TABLE[i - 2][
-                                                                                                      3]) * INTEREST_RATE) - round(
-                        repayment_value, 2)), 2)
+                    round((LOAN_TABLE[i - 2][1] +
+                           LOAN_TABLE[i - 2][2] - LOAN_TABLE[i - 2][3] +
+                           (
+                                   (LOAN_TABLE[i - 2][1] + LOAN_TABLE[i - 2][2] -
+                             LOAN_TABLE[i - 2][3]) * INTEREST_RATE
+                           ) - round(repayment_value, 2)), 2)
                 ]
             )
     print(['Y', 'L Val', 'I', 'P Val', 'Rem Amount'])
@@ -98,7 +99,7 @@ def how_many_years(remaining_val):
     eoy_eight_val = round((eoy_seven_val + (eoy_seven_val * INTEREST_RATE) - repayment_val), 2)
     eoy_nine_val = round((eoy_eight_val + (eoy_eight_val * INTEREST_RATE) - repayment_val), 2)
     eoy_ten_val = round((eoy_nine_val + eoy_nine_val * INTEREST_RATE - repayment_val), 2)
-    if eoy_ten_val >= 0.1:
+    if eoy_ten_val >= 1:
         x = 5
     else:
         x = 4
@@ -126,5 +127,5 @@ if __name__ == '__main__':
     print('\n')
     print('Question 2d.')
     remainder = mid_year_six(LOAN_TABLE, INTEREST_RATE)
-    print(f'The remaining value after paying $2000 halfway through year six is: {remainder}')
+    print(f'The remaining value after paying $2000 halfway through year six is: {round(remainder, 2)}')
     how_many_years(remainder)
