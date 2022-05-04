@@ -57,6 +57,8 @@ def calc_beg_of_year(amount, interest_rate, term):
         payment value,
         remaining value
 """
+
+
 def generate_table(amount, interest, term):
     repayment_value = calc_end_of_year(amount, interest, term)
     for i in range(1, TERM + 1):
@@ -74,7 +76,7 @@ def generate_table(amount, interest, term):
                            LOAN_TABLE[i - 2][2] - LOAN_TABLE[i - 2][3] +
                            (
                                    (LOAN_TABLE[i - 2][1] + LOAN_TABLE[i - 2][2] -
-                             LOAN_TABLE[i - 2][3]) * INTEREST_RATE
+                                    LOAN_TABLE[i - 2][3]) * INTEREST_RATE
                            ) - round(repayment_value, 2)), 2)
                 ]
             )
@@ -86,7 +88,7 @@ def generate_table(amount, interest, term):
 def mid_year_six(table, interest_rate):
     year_six_beg = table[5][1]
     paym = 2000.00
-    interest = year_six_beg * ((interest_rate/12) * 0.5)
+    interest = year_six_beg * ((interest_rate / 12) * 0.5)
     remaining = year_six_beg + interest - paym
     return remaining
 
