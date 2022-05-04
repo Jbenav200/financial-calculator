@@ -11,7 +11,7 @@ LOAN_TABLE = []
 
 def calc_end_of_year():
     '''
-        The formula to calculate equal payments, where L = loan amount, r = rate, t=term is:
+        The formula to calculate equal payments, where L = loan amount, r = rate, t=term or time is:
         L * r * 1 + i ^ t / 1 + i ^ t - 1
     '''
 
