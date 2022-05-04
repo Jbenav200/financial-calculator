@@ -1,3 +1,4 @@
+from helper import calc_end_of_year_helper
 LOAN_AMOUNT = 10000.00
 INTEREST_RATE = 0.06
 TERM = 10
@@ -84,7 +85,26 @@ def six_year_payment():
 
 
 def mid_year_six():
-    pass
+    year_six_beg = LOAN_TABLE[5][1]
+    paym = 2000.00
+    interest = year_six_beg * ((INTEREST_RATE/12) * 6)
+    remaining = year_six_beg + interest - paym
+    return remaining
+
+
+def how_many_years(remaining_val):
+    repayment_val = calc_end_of_year_helper(remaining_val, INTEREST_RATE, 4)
+    print(f'new repayment value: ${round(repayment_val, 2)}')
+    eoy_six_val = remaining_val
+    eoy_seven_val = round((remaining_val + (eoy_six_val * INTEREST_RATE) - repayment_val), 2)
+    eoy_eight_val = round((eoy_seven_val + (eoy_seven_val * INTEREST_RATE) - repayment_val), 2)
+    eoy_nine_val = round((eoy_eight_val + (eoy_eight_val * INTEREST_RATE) - repayment_val), 2)
+    eoy_ten_val = round((eoy_nine_val + eoy_nine_val * INTEREST_RATE - repayment_val), 2)
+    if eoy_ten_val >= 0.1:
+        x = 5
+    else:
+        x = 4
+    print(f'considering the new repayment value, the loan will be paid of in {x} years')
 
 
 """
@@ -107,4 +127,6 @@ if __name__ == '__main__':
     print(f'The amount paying off the principle will be ${round(LOAN_TABLE[5][3] - LOAN_TABLE[5][2], 2)}')
     print('\n')
     print('Question 2d.')
-    print('Answer here...')
+    remainder = mid_year_six()
+    print(f'The remaining value after paying $2000 halfway through year six is: {remainder}')
+    how_many_years(remainder)
