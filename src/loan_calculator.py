@@ -57,7 +57,7 @@ def calc_beg_of_year(amount, interest_rate, term):
         payment value,
         remaining value
 """
-def six_year_payment(amount, interest, term):
+def generate_table(amount, interest, term):
     repayment_value = calc_end_of_year(amount, interest, term)
     for i in range(1, TERM + 1):
         if i == 1:
@@ -85,7 +85,7 @@ def six_year_payment(amount, interest, term):
 def mid_year_six(table, interest_rate):
     year_six_beg = table[5][1]
     paym = 2000.00
-    interest = year_six_beg * ((interest_rate/12) * 6)
+    interest = year_six_beg * ((interest_rate/12) * 0.5)
     remaining = year_six_beg + interest - paym
     return remaining
 
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     print(f'else, the annual payment will be ${LOAN_AMOUNT / TERM}.')
     print('\n')
     print('LOAN TABLE')
-    six_year_payment(LOAN_AMOUNT, INTEREST_RATE, TERM)
+    generate_table(LOAN_AMOUNT, INTEREST_RATE, TERM)
     print('\n')
     print('Question 2c.')
     print(f'The EOY value for year six will be: ${LOAN_TABLE[5][4]}')
