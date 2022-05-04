@@ -2,7 +2,7 @@ LOAN_AMOUNT = 10000
 INTEREST_RATE = 0.06
 TERM = 10
 # LOAN_REPAYMENT = LOAN_AMOUNT / TERM + (LOAN_AMOUNT * INTEREST_RATE)
-TABLE = []
+LOAN_TABLE = []
 '''
     CALCULATE THE PAYMENT VALUE INCLUDING INTEREST WHEN LOAN REPAID AT THE END OF EACH YEAR
     WITH 10 EQUAL PAYMENTS.
@@ -47,32 +47,41 @@ def six_year_payment():
     repayment_value = calc_end_of_year()
     for i in range(1, TERM + 1):
         if i == 1:
-            TABLE.append([i, LOAN_AMOUNT, LOAN_AMOUNT * INTEREST_RATE, round(repayment_value, 2), LOAN_AMOUNT + LOAN_AMOUNT * INTEREST_RATE - round(repayment_value, 2)])
+            LOAN_TABLE.append([i, LOAN_AMOUNT, LOAN_AMOUNT * INTEREST_RATE, round(repayment_value, 2), LOAN_AMOUNT + LOAN_AMOUNT * INTEREST_RATE - round(repayment_value, 2)])
         else:
-            TABLE.append(
+            LOAN_TABLE.append(
                 [
                     i,
-                    round(TABLE[i-2][1] + TABLE[i-2][2] - TABLE[i-2][3], 2),
-                    round((TABLE[i-2][1] + TABLE[i-2][2] - TABLE[i-2][3]) * INTEREST_RATE, 2),
+                    round(LOAN_TABLE[i-2][1] + LOAN_TABLE[i-2][2] - LOAN_TABLE[i-2][3], 2),
+                    round((LOAN_TABLE[i-2][1] + LOAN_TABLE[i-2][2] - LOAN_TABLE[i-2][3]) * INTEREST_RATE, 2),
                     round(repayment_value, 2),
-                    round((TABLE[i-2][1] + TABLE[i-2][2] - TABLE[i-2][3] + ((TABLE[i-2][1] + TABLE[i-2][2] - TABLE[i-2][3]) * INTEREST_RATE) - round(repayment_value, 2)), 2)
+                    round((LOAN_TABLE[i-2][1] + LOAN_TABLE[i-2][2] - LOAN_TABLE[i-2][3] + ((LOAN_TABLE[i-2][1] + LOAN_TABLE[i-2][2] - LOAN_TABLE[i-2][3]) * INTEREST_RATE) - round(repayment_value, 2)), 2)
                 ]
             )
-    for i in range(0, len(TABLE)):
-        if i == 1:
-            str(TABLE[i]) + '\n'
-        else:
-            print(f'year {i + 1}')
-        print(str(TABLE[i]) + '\n')
+    print(['Year', 'Loan Value', 'Interest', 'Payment', 'Remaining Loan Amount'])
+    for i in range(0, len(LOAN_TABLE)):
+        print(str(LOAN_TABLE[i]))
+
+
+def mid_year_six():
+    pass
 
 
 if __name__ == '__main__':
     print('Question 2a.')
     value = calc_end_of_year()
-    print(f'${round(value, 2)}')
-    # eoyVal = calc_end_of_year()
-    # print(f'If the annual payment is made at the end of the year each payment will be: ${round(LOAN_REPAYMENT,2)}')
+    print(f'${round(value, 2)} is the value of the 10 equal payments.')
+    print('\n')
     print('Question 2b.')
     calc_beg_of_year()
-    print('Question 2c.')
+    print(f'else, the annual payment will be ${LOAN_AMOUNT/TERM}')
+    print('\n')
+    print('LOAN TABLE')
     six_year_payment()
+    print('\n')
+    print('Question 2c.')
+    print(f'The EOY value for year six will be: ${LOAN_TABLE[5][4]}')
+    print(f'The amount paying off the principle will be ${round(LOAN_TABLE[5][3] - LOAN_TABLE[5][2], 2)}')
+    print('\n')
+    print('Question 2d.')
+
