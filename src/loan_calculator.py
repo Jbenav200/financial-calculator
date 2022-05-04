@@ -1,4 +1,4 @@
-LOAN_AMOUNT = 10000
+LOAN_AMOUNT = 10000.00
 INTEREST_RATE = 0.06
 TERM = 10
 # LOAN_REPAYMENT = LOAN_AMOUNT / TERM + (LOAN_AMOUNT * INTEREST_RATE)
@@ -10,6 +10,11 @@ LOAN_TABLE = []
 
 
 def calc_end_of_year():
+    '''
+        The formula to calculate equal payments, where L = loan amount, r = rate, t=term is:
+        L * r * 1 + i ^ t / 1 + i ^ t - 1
+    '''
+
     repayment = LOAN_AMOUNT * (INTEREST_RATE * pow(1 + INTEREST_RATE, 10))/(pow(1 + INTEREST_RATE, 10)-1)
     return repayment
 
@@ -40,14 +45,14 @@ def calc_beg_of_year():
             value = LOAN_AMOUNT / TERM + ((LOAN_AMOUNT * interest) * 2)
         else:
             value = LOAN_AMOUNT / TERM + ((LOAN_AMOUNT * interest) * 3)
-        print(f'If the annual payment is made in {month}: ${value}')
+        print(f'If the annual payment is made in {month}: ${value},')
 
 
 def six_year_payment():
     repayment_value = calc_end_of_year()
     for i in range(1, TERM + 1):
         if i == 1:
-            LOAN_TABLE.append([i, LOAN_AMOUNT, LOAN_AMOUNT * INTEREST_RATE, round(repayment_value, 2), LOAN_AMOUNT + LOAN_AMOUNT * INTEREST_RATE - round(repayment_value, 2)])
+            LOAN_TABLE.append([i, LOAN_AMOUNT, round(LOAN_AMOUNT * INTEREST_RATE, 2), round(repayment_value, 2), LOAN_AMOUNT + LOAN_AMOUNT * INTEREST_RATE - round(repayment_value, 2)])
         else:
             LOAN_TABLE.append(
                 [
@@ -58,7 +63,7 @@ def six_year_payment():
                     round((LOAN_TABLE[i-2][1] + LOAN_TABLE[i-2][2] - LOAN_TABLE[i-2][3] + ((LOAN_TABLE[i-2][1] + LOAN_TABLE[i-2][2] - LOAN_TABLE[i-2][3]) * INTEREST_RATE) - round(repayment_value, 2)), 2)
                 ]
             )
-    print(['Year', 'Loan Value', 'Interest', 'Payment', 'Remaining Loan Amount'])
+    print(['Y', 'L Val', 'I', 'P Val', 'Rem Amount'])
     for i in range(0, len(LOAN_TABLE)):
         print(str(LOAN_TABLE[i]))
 
@@ -74,7 +79,7 @@ if __name__ == '__main__':
     print('\n')
     print('Question 2b.')
     calc_beg_of_year()
-    print(f'else, the annual payment will be ${LOAN_AMOUNT/TERM}')
+    print(f'else, the annual payment will be ${LOAN_AMOUNT/TERM}.')
     print('\n')
     print('LOAN TABLE')
     six_year_payment()
@@ -84,4 +89,5 @@ if __name__ == '__main__':
     print(f'The amount paying off the principle will be ${round(LOAN_TABLE[5][3] - LOAN_TABLE[5][2], 2)}')
     print('\n')
     print('Question 2d.')
+    print('Answer here...')
 
