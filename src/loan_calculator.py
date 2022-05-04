@@ -1,4 +1,3 @@
-from helper import calc_end_of_year_helper
 LOAN_AMOUNT = 10000.00
 INTEREST_RATE = 0.06
 TERM = 10
@@ -11,13 +10,12 @@ LOAN_TABLE = []
 '''
 
 
-def calc_end_of_year():
+def calc_end_of_year(amount, interest, time):
     """
         The formula to calculate equal payments, where L = loan amount, r = rate, t = time is:
         L * r * 1 + i ^ t / 1 + i ^ t - 1
     """
-
-    repayment = LOAN_AMOUNT * (INTEREST_RATE * pow(1 + INTEREST_RATE, 10)) / (pow(1 + INTEREST_RATE, 10) - 1)
+    repayment = amount * (interest * pow(1 + interest, time)) / (pow(1 + interest, time) - 1)
     return repayment
 
 
@@ -27,12 +25,12 @@ def calc_end_of_year():
 """
 
 
-def calc_beg_of_year(value=0.0):
+def calc_beg_of_year(amount, interest_rate, term):
     """
         because the interest is annual, applying compound interest
         is required. first the interest rate is calculated
     """
-    interest = INTEREST_RATE / 12
+    interest = interest_rate / 12
     """
         Beginning of the year is a vague term, so I have made the assumption
         that the payment could be made at the end of any month within the first
@@ -42,11 +40,11 @@ def calc_beg_of_year(value=0.0):
     print(f'taking into account compounding interest')
     for month in months:
         if month == 'Jan':
-            value = LOAN_AMOUNT / TERM + ((LOAN_AMOUNT * interest) * 1)
+            value = amount / term + ((amount * interest) * 1)
         elif month == 'Feb':
-            value = LOAN_AMOUNT / TERM + ((LOAN_AMOUNT * interest) * 2)
+            value = amount / term + ((amount * interest) * 2)
         else:
-            value = LOAN_AMOUNT / TERM + ((LOAN_AMOUNT * interest) * 3)
+            value = amount / term + ((amount * interest) * 3)
         print(f'If the annual payment is made in {month}: ${value},')
 
 
@@ -59,8 +57,8 @@ def calc_beg_of_year(value=0.0):
         payment value,
         remaining value
 """
-def six_year_payment():
-    repayment_value = calc_end_of_year()
+def six_year_payment(amount, interest, term):
+    repayment_value = calc_end_of_year(amount, interest, term)
     for i in range(1, TERM + 1):
         if i == 1:
             LOAN_TABLE.append([i, LOAN_AMOUNT, round(LOAN_AMOUNT * INTEREST_RATE, 2), round(repayment_value, 2),
@@ -84,16 +82,16 @@ def six_year_payment():
         print(str(LOAN_TABLE[i]))
 
 
-def mid_year_six():
-    year_six_beg = LOAN_TABLE[5][1]
+def mid_year_six(table, interest_rate):
+    year_six_beg = table[5][1]
     paym = 2000.00
-    interest = year_six_beg * ((INTEREST_RATE/12) * 6)
+    interest = year_six_beg * ((interest_rate/12) * 6)
     remaining = year_six_beg + interest - paym
     return remaining
 
 
 def how_many_years(remaining_val):
-    repayment_val = calc_end_of_year_helper(remaining_val, INTEREST_RATE, 4)
+    repayment_val = calc_end_of_year(remaining_val, INTEREST_RATE, 4)
     print(f'new repayment value: ${round(repayment_val, 2)}')
     eoy_six_val = remaining_val
     eoy_seven_val = round((remaining_val + (eoy_six_val * INTEREST_RATE) - repayment_val), 2)
@@ -112,21 +110,21 @@ def how_many_years(remaining_val):
 """
 if __name__ == '__main__':
     print('Question 2a.')
-    eoy_val = calc_end_of_year()
+    eoy_val = calc_end_of_year(LOAN_AMOUNT, INTEREST_RATE, TERM)
     print(f'${round(eoy_val, 2)} is the value of the 10 equal payments.')
     print('\n')
     print('Question 2b.')
-    calc_beg_of_year()
+    calc_beg_of_year(LOAN_AMOUNT, INTEREST_RATE, TERM)
     print(f'else, the annual payment will be ${LOAN_AMOUNT / TERM}.')
     print('\n')
     print('LOAN TABLE')
-    six_year_payment()
+    six_year_payment(LOAN_AMOUNT, INTEREST_RATE, TERM)
     print('\n')
     print('Question 2c.')
     print(f'The EOY value for year six will be: ${LOAN_TABLE[5][4]}')
     print(f'The amount paying off the principle will be ${round(LOAN_TABLE[5][3] - LOAN_TABLE[5][2], 2)}')
     print('\n')
     print('Question 2d.')
-    remainder = mid_year_six()
+    remainder = mid_year_six(LOAN_TABLE, INTEREST_RATE)
     print(f'The remaining value after paying $2000 halfway through year six is: {remainder}')
     how_many_years(remainder)
