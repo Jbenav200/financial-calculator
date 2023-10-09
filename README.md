@@ -1,4 +1,4 @@
-# Job Application for SAS Institute
+# Coding Test for Interview
 
 **Goal**: Write programs with SAS or Python to solve the following problems. Please derive the solution with Excel to validate your SAS program. During the interview, you will explain, display, and demonstrate your programs with solutions and the computations step by step. If you make any additional assumptions in your calculations beyond those listed, please explain your choices.
 
